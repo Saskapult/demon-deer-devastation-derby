@@ -1,0 +1,81 @@
+[gd_scene load_steps=14 format=3 uid="uid://cwbjsyaqmfjkv"]
+
+[ext_resource type="Script" uid="uid://bmnmybi3g3yyh" path="res://towers/brick/brick_tower.gd" id="1_7mulh"]
+[ext_resource type="Texture2D" uid="uid://bnqxpux7a5wqt" path="res://towers/brick/brick_tower.png" id="1_bq8bw"]
+[ext_resource type="AudioStream" uid="uid://c51wl74f2dh42" path="res://sounds/fall2.ogg" id="2_7mulh"]
+[ext_resource type="PackedScene" uid="uid://chdbik0tn6opq" path="res://towers/hover_component.tscn" id="3_6ucfb"]
+[ext_resource type="PackedScene" uid="uid://dna8jqxvyobm4" path="res://towers/targeting_component.tscn" id="4_qnw82"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oiqhu"]
+atlas = ExtResource("1_bq8bw")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n01xx"]
+atlas = ExtResource("1_bq8bw")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t2gic"]
+atlas = ExtResource("1_bq8bw")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1t4df"]
+atlas = ExtResource("1_bq8bw")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6ikp1"]
+atlas = ExtResource("1_bq8bw")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7a151"]
+atlas = ExtResource("1_bq8bw")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_o5kwp"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oiqhu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n01xx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t2gic")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1t4df")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6ikp1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7a151")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vvoqr"]
+radius = 29.1548
+
+[node name="BrickTower" type="Node2D"]
+script = ExtResource("1_7mulh")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_o5kwp")
+frame_progress = 0.666141
+
+[node name="RockSpawnPoint" type="Node2D" parent="."]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_7mulh")
+
+[node name="HoverComponent" parent="." instance=ExtResource("3_6ucfb")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HoverComponent"]
+shape = SubResource("CircleShape2D_vvoqr")
+
+[node name="TargetingComponent" parent="." instance=ExtResource("4_qnw82")]
+target_range = 200000.0

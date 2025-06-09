@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://dkucj3yhrmr54"]
+
+[ext_resource type="Script" uid="uid://bwixioisudbot" path="res://enemy/example_enemy.gd" id="1_ts3gs"]
+[ext_resource type="Texture2D" uid="uid://bcfeiuh21kyh1" path="res://icon.svg" id="2_qebd5"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ts3gs"]
+
+[node name="ExampleEnemy" type="CharacterBody2D"]
+script = ExtResource("1_ts3gs")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_ts3gs")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_qebd5")

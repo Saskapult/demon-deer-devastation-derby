@@ -1,0 +1,77 @@
+[gd_scene load_steps=13 format=3 uid="uid://dsj5qly2dmisj"]
+
+[ext_resource type="Script" uid="uid://botr5sfh2v85k" path="res://towers/rocking_tower/rocking_tower.gd" id="1_iyiec"]
+[ext_resource type="Texture2D" uid="uid://c311ncidmd65s" path="res://towers/rocking_tower/rockers.png" id="1_uwxna"]
+[ext_resource type="PackedScene" uid="uid://b7huolssx2uis" path="res://towers/rocking_tower/tunes.tscn" id="2_42q15"]
+[ext_resource type="PackedScene" uid="uid://dna8jqxvyobm4" path="res://towers/targeting_component.tscn" id="3_u1ytf"]
+[ext_resource type="PackedScene" uid="uid://chdbik0tn6opq" path="res://towers/hover_component.tscn" id="5_t75n5"]
+[ext_resource type="AudioStream" uid="uid://cgirk2wjpbrif" path="res://sounds/strum2.ogg" id="6_f87cg"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iyiec"]
+atlas = ExtResource("1_uwxna")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u1ytf"]
+atlas = ExtResource("1_uwxna")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_42q15"]
+atlas = ExtResource("1_uwxna")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t75n5"]
+atlas = ExtResource("1_uwxna")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_i4gty"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iyiec")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u1ytf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_42q15")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t75n5")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_i4gty"]
+radius = 42.0119
+
+[node name="RockingTower" type="Node2D" groups=["rockers"]]
+script = ExtResource("1_iyiec")
+Projectile = ExtResource("2_42q15")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_i4gty")
+
+[node name="TargetingComponent" parent="." instance=ExtResource("3_u1ytf")]
+target_range = 200000.0
+
+[node name="TunesPoint00" type="Node2D" parent="."]
+position = Vector2(-39, -32)
+
+[node name="TunesPoint01" type="Node2D" parent="."]
+position = Vector2(0, -45)
+
+[node name="TunesPoint02" type="Node2D" parent="."]
+position = Vector2(36, -32)
+
+[node name="HoverComponent" parent="." instance=ExtResource("5_t75n5")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HoverComponent"]
+shape = SubResource("CircleShape2D_i4gty")
+
+[node name="StrumPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_f87cg")
+
+[connection signal="hover_clicked" from="HoverComponent" to="." method="_on_hover_component_hover_clicked"]

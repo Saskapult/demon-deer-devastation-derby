@@ -1,0 +1,118 @@
+[gd_scene load_steps=13 format=3 uid="uid://dlhxk56hxtyba"]
+
+[ext_resource type="Texture2D" uid="uid://pd316aflk1of" path="res://enemy/hungry/hungry.png" id="1_5npja"]
+[ext_resource type="Script" uid="uid://dehya5hekonxd" path="res://menu/menu_scene.gd" id="1_7g4pt"]
+[ext_resource type="Texture2D" uid="uid://b5663syjklavg" path="res://title.png" id="1_apycq"]
+[ext_resource type="Texture2D" uid="uid://4owkacawk0fa" path="res://plant.png" id="3_apycq"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5npja"]
+atlas = ExtResource("1_5npja")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_apycq"]
+atlas = ExtResource("1_5npja")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7g4pt"]
+atlas = ExtResource("1_5npja")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xkvte"]
+atlas = ExtResource("1_5npja")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oljum"]
+atlas = ExtResource("1_5npja")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g0gdl"]
+atlas = ExtResource("1_5npja")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yg8nm"]
+atlas = ExtResource("1_5npja")
+region = Rect2(192, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_odpq8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5npja")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_apycq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7g4pt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xkvte")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oljum")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g0gdl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yg8nm")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="MenuScene" type="Node2D"]
+script = ExtResource("1_7g4pt")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+offset_right = 1280.0
+offset_bottom = 720.0
+
+[node name="ColorRect" type="ColorRect" parent="MarginContainer"]
+layout_mode = 2
+color = Color(0.487042, 0.320678, 0.0127375, 1)
+
+[node name="TextureRect2" type="TextureRect" parent="MarginContainer"]
+layout_mode = 2
+texture = ExtResource("1_apycq")
+stretch_mode = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+alignment = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+bbcode_enabled = true
+text = "In the grim darkness of the current present there can be no tomatoes. There is no peace in the garden, only an ever-present hunger and slaughter, and the laughter of thirsting deer."
+fit_content = true
+horizontal_alignment = 1
+
+[node name="StartButton" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "No! Don't eat ma tomates!"
+
+[node name="EndButton" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Idk I'm burnt out."
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+texture = ExtResource("1_5npja")
+stretch_mode = 4
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="MarginContainer"]
+position = Vector2(238, 536)
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_odpq8")
+frame = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="MarginContainer"]
+position = Vector2(988, 550)
+scale = Vector2(2, 2)
+texture = ExtResource("3_apycq")

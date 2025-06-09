@@ -1,0 +1,97 @@
+[gd_scene load_steps=15 format=3 uid="uid://cj6chlmi8mjf0"]
+
+[ext_resource type="Script" uid="uid://cb00adp0p3syj" path="res://towers/fate_tower/fate_tower.gd" id="1_lbbbo"]
+[ext_resource type="Texture2D" uid="uid://c6ntxiwwdducv" path="res://towers/fate_tower/rockers_d.png" id="1_rvsfa"]
+[ext_resource type="PackedScene" uid="uid://b7huolssx2uis" path="res://towers/rocking_tower/tunes.tscn" id="2_1hjs4"]
+[ext_resource type="PackedScene" uid="uid://dna8jqxvyobm4" path="res://towers/targeting_component.tscn" id="2_lbbbo"]
+[ext_resource type="PackedScene" uid="uid://chdbik0tn6opq" path="res://towers/hover_component.tscn" id="3_1hjs4"]
+[ext_resource type="AudioStream" uid="uid://cgirk2wjpbrif" path="res://sounds/strum2.ogg" id="4_7tabc"]
+[ext_resource type="Texture2D" uid="uid://b3vvfnhcx1lw0" path="res://towers/rocking_tower/tunes.png" id="7_7tabc"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k0hh4"]
+atlas = ExtResource("1_rvsfa")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sa34h"]
+atlas = ExtResource("1_rvsfa")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m4qvg"]
+atlas = ExtResource("1_rvsfa")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1tvn2"]
+atlas = ExtResource("1_rvsfa")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rk11h"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k0hh4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sa34h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m4qvg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1tvn2")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_f3vxn"]
+radius = 42.0119
+
+[sub_resource type="Gradient" id="Gradient_k0hh4"]
+offsets = PackedFloat32Array(0, 0.513333, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[node name="FateTower" type="Node2D" groups=["ascended_rockers", "rockers"]]
+script = ExtResource("1_lbbbo")
+Projectile = ExtResource("2_1hjs4")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_rk11h")
+frame = 2
+frame_progress = 0.356292
+speed_scale = 4.0
+
+[node name="TargetingComponent" parent="." instance=ExtResource("2_lbbbo")]
+target_range = 400000.0
+
+[node name="TunesPoint00" type="Node2D" parent="."]
+position = Vector2(-39, -32)
+
+[node name="TunesPoint01" type="Node2D" parent="."]
+position = Vector2(0, -45)
+
+[node name="TunesPoint02" type="Node2D" parent="."]
+position = Vector2(36, -32)
+
+[node name="HoverComponent" parent="." instance=ExtResource("3_1hjs4")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HoverComponent"]
+shape = SubResource("CircleShape2D_f3vxn")
+
+[node name="StrumPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_7tabc")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+texture = ExtResource("7_7tabc")
+emission_shape = 1
+emission_sphere_radius = 9.1
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 50.0
+initial_velocity_max = 50.0
+orbit_velocity_min = 0.5
+orbit_velocity_max = 1.0
+tangential_accel_min = -300.0
+tangential_accel_max = -300.0
+color_ramp = SubResource("Gradient_k0hh4")

@@ -1,0 +1,90 @@
+[gd_scene load_steps=15 format=3 uid="uid://bmn3yvewfbhx4"]
+
+[ext_resource type="Script" uid="uid://cst2ixfsedljb" path="res://towers/brick/brick.gd" id="1_hh1k1"]
+[ext_resource type="Texture2D" uid="uid://c1m360tv7ohgn" path="res://towers/brick/brick.png" id="2_vco30"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bwjxv"]
+atlas = ExtResource("2_vco30")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mqsyw"]
+atlas = ExtResource("2_vco30")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k0lly"]
+atlas = ExtResource("2_vco30")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xx0ei"]
+atlas = ExtResource("2_vco30")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mv0an"]
+atlas = ExtResource("2_vco30")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dtu3t"]
+atlas = ExtResource("2_vco30")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6slw0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bwjxv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mqsyw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k0lly")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xx0ei")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mv0an")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dtu3t")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7ywgg"]
+
+[sub_resource type="Gradient" id="Gradient_2sseu"]
+offsets = PackedFloat32Array(0, 0.298701, 1)
+colors = PackedColorArray(0.0260424, 0.631545, 1, 1, 1, 1, 1, 1, 1, 0.0980392, 0.6, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_h7k3v"]
+frequency = 0.0054
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_mf8r3"]
+width = 8
+height = 8
+color_ramp = SubResource("Gradient_2sseu")
+noise = SubResource("FastNoiseLite_h7k3v")
+
+[sub_resource type="Gradient" id="Gradient_ieobc"]
+interpolation_mode = 2
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[node name="Brick" type="Area2D" groups=["projectiles"]]
+script = ExtResource("1_hh1k1")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(3, 3)
+sprite_frames = SubResource("SpriteFrames_6slw0")
+frame_progress = 0.775665
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_7ywgg")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+amount = 64
+texture = SubResource("NoiseTexture2D_mf8r3")
+gravity = Vector2(0, 0)
+color_ramp = SubResource("Gradient_ieobc")

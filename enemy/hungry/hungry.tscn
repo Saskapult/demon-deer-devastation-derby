@@ -1,0 +1,88 @@
+[gd_scene load_steps=14 format=3 uid="uid://vwpmuy4yslck"]
+
+[ext_resource type="Script" uid="uid://c8s1ofva53x72" path="res://enemy/hungry/hungry.gd" id="1_argbi"]
+[ext_resource type="Texture2D" uid="uid://pd316aflk1of" path="res://enemy/hungry/hungry.png" id="1_cub47"]
+[ext_resource type="PackedScene" uid="uid://b0n4qy5w3kwnr" path="res://enemy/health_component.tscn" id="2_v01ne"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v01ne"]
+atlas = ExtResource("1_cub47")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_argbi"]
+atlas = ExtResource("1_cub47")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l15b8"]
+atlas = ExtResource("1_cub47")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gta6r"]
+atlas = ExtResource("1_cub47")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r20f2"]
+atlas = ExtResource("1_cub47")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7kw5p"]
+atlas = ExtResource("1_cub47")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j0f6l"]
+atlas = ExtResource("1_cub47")
+region = Rect2(192, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4focm"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v01ne")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_argbi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l15b8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gta6r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r20f2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7kw5p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j0f6l")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_argbi"]
+radius = 31.0644
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_l15b8"]
+radius = 31.0161
+
+[node name="Hungry" type="CharacterBody2D" groups=["deer"]]
+script = ExtResource("1_argbi")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_4focm")
+frame = 2
+frame_progress = 0.0958713
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_argbi")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+
+[node name="HealthComponent" parent="." instance=ExtResource("2_v01ne")]
+health = 400.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HealthComponent"]
+shape = SubResource("CircleShape2D_l15b8")

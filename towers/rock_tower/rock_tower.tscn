@@ -1,0 +1,67 @@
+[gd_scene load_steps=13 format=3 uid="uid://wvqgy6grlkoq"]
+
+[ext_resource type="Script" uid="uid://d1ocopkxvxeu2" path="res://towers/rock_tower/rock_tower.gd" id="1_c4gs8"]
+[ext_resource type="Texture2D" uid="uid://dqhuud20pfo4v" path="res://towers/rock_tower/rock_tower.png" id="1_t3tbc"]
+[ext_resource type="PackedScene" uid="uid://clwd4scw71fk" path="res://towers/rock_tower/rock.tscn" id="2_ira61"]
+[ext_resource type="AudioStream" uid="uid://b7sadj0asbkcw" path="res://sounds/sweep.ogg" id="4_8umho"]
+[ext_resource type="PackedScene" uid="uid://chdbik0tn6opq" path="res://towers/hover_component.tscn" id="5_e62ht"]
+[ext_resource type="PackedScene" uid="uid://dna8jqxvyobm4" path="res://towers/targeting_component.tscn" id="6_ddwmg"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t3tbc"]
+atlas = ExtResource("1_t3tbc")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c4gs8"]
+atlas = ExtResource("1_t3tbc")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ira61"]
+atlas = ExtResource("1_t3tbc")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8umho"]
+atlas = ExtResource("1_t3tbc")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4wjeu"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t3tbc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c4gs8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ira61")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8umho")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4wjeu"]
+radius = 29.1548
+
+[node name="RockTower" type="Node2D"]
+script = ExtResource("1_c4gs8")
+Projectile = ExtResource("2_ira61")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_4wjeu")
+
+[node name="RockSpawnPoint" type="Node2D" parent="."]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_8umho")
+
+[node name="HoverComponent" parent="." instance=ExtResource("5_e62ht")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HoverComponent"]
+shape = SubResource("CircleShape2D_4wjeu")
+
+[node name="TargetingComponent" parent="." instance=ExtResource("6_ddwmg")]

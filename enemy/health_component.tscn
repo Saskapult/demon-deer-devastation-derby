@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://b0n4qy5w3kwnr"]
+
+[ext_resource type="Script" uid="uid://csp5dka6o47xr" path="res://enemy/health_component.gd" id="1_rtmsk"]
+
+[node name="HealthComponent" type="Area2D"]
+script = ExtResource("1_rtmsk")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

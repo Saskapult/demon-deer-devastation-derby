@@ -1,0 +1,67 @@
+[gd_scene load_steps=11 format=3 uid="uid://qr68rha8kyvp"]
+
+[ext_resource type="Script" uid="uid://cst2ixfsedljb" path="res://towers/brick/brick.gd" id="1_bwjxv"]
+[ext_resource type="Texture2D" uid="uid://c1m360tv7ohgn" path="res://towers/brick/brick.png" id="1_hq6oa"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bwjxv"]
+atlas = ExtResource("1_hq6oa")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mqsyw"]
+atlas = ExtResource("1_hq6oa")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k0lly"]
+atlas = ExtResource("1_hq6oa")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xx0ei"]
+atlas = ExtResource("1_hq6oa")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mv0an"]
+atlas = ExtResource("1_hq6oa")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dtu3t"]
+atlas = ExtResource("1_hq6oa")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6slw0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bwjxv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mqsyw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k0lly")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xx0ei")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mv0an")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dtu3t")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7ywgg"]
+
+[node name="Brick" type="Area2D" groups=["projectiles"]]
+script = ExtResource("1_bwjxv")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(3, 3)
+sprite_frames = SubResource("SpriteFrames_6slw0")
+frame_progress = 0.944212
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_7ywgg")

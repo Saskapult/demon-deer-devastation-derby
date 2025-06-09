@@ -1,0 +1,32 @@
+[gd_scene load_steps=6 format=3 uid="uid://dkcljbnoa5ndi"]
+
+[ext_resource type="Script" uid="uid://bv2lr073fsy6h" path="res://towers/eepy/tp_parts.gd" id="1_drxu0"]
+
+[sub_resource type="Gradient" id="Gradient_34fih"]
+offsets = PackedFloat32Array(0.538961, 1)
+colors = PackedColorArray(0, 0, 0, 0, 1, 0, 1, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_drxu0"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ymous"]
+color_ramp = SubResource("Gradient_34fih")
+noise = SubResource("FastNoiseLite_drxu0")
+
+[sub_resource type="Gradient" id="Gradient_drxu0"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[node name="TpParts" type="CPUParticles2D"]
+emitting = false
+texture = SubResource("NoiseTexture2D_ymous")
+one_shot = true
+explosiveness = 1.0
+lifetime_randomness = 0.25
+gravity = Vector2(0, 0)
+angular_velocity_min = -50.0
+angular_velocity_max = 50.0
+orbit_velocity_min = 0.1
+orbit_velocity_max = 0.1
+scale_amount_min = 0.08
+scale_amount_max = 0.08
+color_ramp = SubResource("Gradient_drxu0")
+script = ExtResource("1_drxu0")

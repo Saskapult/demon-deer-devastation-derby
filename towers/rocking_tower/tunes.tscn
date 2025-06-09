@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://b7huolssx2uis"]
+
+[ext_resource type="Texture2D" uid="uid://b3vvfnhcx1lw0" path="res://towers/rocking_tower/tunes.png" id="1_0wvya"]
+[ext_resource type="Script" uid="uid://bxxtpuwt7veyb" path="res://towers/rocking_tower/tunes.gd" id="1_r06ms"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_r06ms"]
+
+[node name="Tunes" type="Area2D" groups=["projectiles"]]
+script = ExtResource("1_r06ms")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_0wvya")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_r06ms")

@@ -1,0 +1,81 @@
+[gd_scene load_steps=14 format=3 uid="uid://bjomfjn65pto5"]
+
+[ext_resource type="Script" uid="uid://2v52bh72sgip" path="res://towers/pride/pride_tower.gd" id="1_dgwtr"]
+[ext_resource type="Texture2D" uid="uid://cqsbtua0wir87" path="res://towers/pride/pride_tower.png" id="2_dgwtr"]
+[ext_resource type="AudioStream" uid="uid://c51wl74f2dh42" path="res://sounds/fall2.ogg" id="3_ay5qt"]
+[ext_resource type="PackedScene" uid="uid://chdbik0tn6opq" path="res://towers/hover_component.tscn" id="4_fehwd"]
+[ext_resource type="PackedScene" uid="uid://dna8jqxvyobm4" path="res://towers/targeting_component.tscn" id="5_upnp1"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_adgpm"]
+atlas = ExtResource("2_dgwtr")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4154i"]
+atlas = ExtResource("2_dgwtr")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rkavx"]
+atlas = ExtResource("2_dgwtr")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nij68"]
+atlas = ExtResource("2_dgwtr")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0wygg"]
+atlas = ExtResource("2_dgwtr")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5ydx3"]
+atlas = ExtResource("2_dgwtr")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_o5kwp"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_adgpm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4154i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rkavx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nij68")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0wygg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5ydx3")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vvoqr"]
+radius = 29.1548
+
+[node name="PrideTower" type="Node2D"]
+script = ExtResource("1_dgwtr")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_o5kwp")
+frame_progress = 0.666141
+
+[node name="RockSpawnPoint" type="Node2D" parent="."]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_ay5qt")
+
+[node name="HoverComponent" parent="." instance=ExtResource("4_fehwd")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HoverComponent"]
+shape = SubResource("CircleShape2D_vvoqr")
+
+[node name="TargetingComponent" parent="." instance=ExtResource("5_upnp1")]
+target_range = 200000.0
